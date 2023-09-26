@@ -7,26 +7,22 @@ typedef struct No
     struct No *right, *left;
 } No;
 
+No *createNode(int value)
+{
+    No *newNode = malloc(sizeof(No));
+    newNode->left = NULL;
+    newNode->right = NULL;
+    newNode->value = value;
+
+    return newNode;
+}
+
 void insertNode(No **root, int value)
 {
-    if (*root == NULL)
-    {
-        *root = malloc(sizeof(No));
-        (*root)->value = value;
-        (*root)->left = NULL;
-        (*root)->right = NULL;
-    }
-    else
-    {
-        if (value < (*root)->value)
-        {
-            insertNode(&((*root)->left), value);
-        }
-        else
-        {
-            insertNode(&((*root)->right), value);
-        }
-    }
+    No* pt = *root;
+    int f = -1;
+    search(value, pt, &f);
+    printf("%d", f);
 }
 
 void search(int value, No *root, int *f)
@@ -84,18 +80,10 @@ void print(No *root)
 int main()
 {
 
-    No *root = NULL;
-    int *f;
+    No *root = createNode(15);
+    int f = 0;
 
-    for (int i = 0; i < 50; i++)
-    {
-        int randomValue = rand() % 1000; // Gera um valor aleatório entre 0 e 99
-        insertNode(&root, randomValue);
-    }
-
-    search(5, root, f);
-
-    print("%d", f);
+    insertNode(&root, 16);
 
     // print(root);
 
