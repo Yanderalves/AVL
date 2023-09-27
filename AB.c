@@ -22,7 +22,27 @@ void insertNode(No **root, int value)
     No* pt = *root;
     int f = -1;
     search(value, pt, &f);
-    printf("%d", f);
+
+    if(f == 1){
+        printf("Inserção inválida\n");
+    }else{
+        No* newNode = createNode(value);
+        printf("O F atual: %d\n", f);
+        switch (f)
+        {
+        case 0:
+            *root = newNode;
+            break;
+        case 2:
+            pt->left = newNode; 
+            break;
+        case 3:
+            pt->right = newNode;
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void search(int value, No *root, int *f)
@@ -81,9 +101,10 @@ int main()
 {
 
     No *root = createNode(15);
-    int f = 0;
 
-    insertNode(&root, 16);
+    insertNode(&root, 15);
+    insertNode(&root, 18);
+    insertNode(&root, 14);
 
     // print(root);
 
